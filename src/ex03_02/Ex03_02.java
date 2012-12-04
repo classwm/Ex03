@@ -46,6 +46,7 @@ public class Ex03_02 {
             System.out.println("* " +  investmentName);
             }
             System.out.println("Która lokatę wybierasz?");
+            String investmentName = sc.nextLine();
             
             Investment selectedInvestment = null; // TODO
 

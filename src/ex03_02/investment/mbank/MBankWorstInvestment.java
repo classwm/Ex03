@@ -20,7 +20,6 @@ public class MBankWorstInvestment extends Investment {
     @Override
     public Date howMuchLonger() {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
+    }  
     
 }

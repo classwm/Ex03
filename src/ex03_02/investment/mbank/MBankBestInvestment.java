@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class MBankBestInvestment extends Investment {
 
-    public MBankWorstInvestment(Date startDate, float contribution, float interestRate) {
+    public MBankBestInvestment(Date startDate, float contribution, float interestRate) {
         super(startDate, contribution, interestRate);
     }
 
