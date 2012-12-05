@@ -8,15 +8,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 public abstract class Bank {
+    
+    public void setListOfAccounts(Account acc) {
+        listOfAccounts.add(acc);
+    }
+    
+    
+    
+    public Set<Account> listOfAccounts;
+    
 
     protected HashMap<String, Class<? extends Account>> availableAccounts; // wartościa hasha jest klasa Account
 
-    public final List<String> getAvailableAccountNames() {        {
-             
-        return new ArrayList<String>(availableAccounts.keySet());        
-    }
+    public final List<String> getAvailableAccountNames() {
+        {
+
+            return new ArrayList<String>(availableAccounts.keySet());
+        }
     }
 
     public final Account createAccount(String accountName, String firstName, String lastName,
@@ -29,39 +41,35 @@ public abstract class Bank {
             // IT'S WRONG, BUT LEAVE IT
         }
         // availableAccounts.put("obj", StudentAccountPkoBp.class); przykład użycia HashMapy
-        
+
         return null;
     }
-    
+
     public final Investment createInvestment(String investmentName, float capital) {
         Class<? extends Investment> investmentClass = availableInvestments.get(investmentName); //uzyskane z wywołania klasy
 
         Date time = null;
-       
+
         try {
             return investmentClass.getConstructor(Date.class, float.class, float.class).newInstance(Date.class, float.class, 5); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             // IT'S WRONG, BUT LEAVE IT
         }
         // availableAccounts.put("obj", StudentAccountPkoBp.class); przykład użycia HashMapy
-        
+
         return null;
     }
-    
-     protected HashMap<String, Class<? extends Investment>> availableInvestments;
+    protected HashMap<String, Class<? extends Investment>> availableInvestments;
 
     public final List<String> getAvailableInvestmentsNames() {
         return new ArrayList<String>(availableInvestments.keySet());
     }
-
+    
     
     
     // public abstract Investment createInvestement(String investmentName, float contribution);   
-    
 //    public final Investment createInvestement(String investmentName, float contribution) {
 //        // TODO użyć refleksji, na klasie wywołany konstruktor
 //        return null;
 //    }
-    
-   
 }

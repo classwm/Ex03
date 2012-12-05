@@ -23,6 +23,10 @@ public abstract class Account {
     public String getLastName() {
         return lastName;
     }
+    public String getAccountName() {
+        return accountName;
+    }
+    
     private String accountName;
     private String firstName;
     private String lastName;

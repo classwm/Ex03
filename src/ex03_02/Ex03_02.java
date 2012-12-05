@@ -15,6 +15,9 @@ public class Ex03_02 {
 
         String selected = "N";
         while (!selected.equalsIgnoreCase("Y")) {
+            
+            
+            
             System.out.println("Do wyboru sa nastepujace banki:");
             for (String bankName : FSC.getBankList()) {
                 System.out.println("* " + bankName);
@@ -37,7 +40,14 @@ public class Ex03_02 {
             System.out.println("Kasa?:");
             Float capital = sc.nextFloat();
             Account account = selectedBank.createAccount(accountName, firstName, lastName, capital);
-            System.out.println("Stan konta " + account.getCapital());
+            
+            System.out.println("Nazwa konta: " + account.getAccountName());
+            System.out.println("Imię: " + account.getFirstName());
+            System.out.println("Nazwisko: " + account.getLastName());
+            System.out.println("Stan konta: " + account.getCapital());
+            
+//            selectedBank.setListOfAccounts(account);
+//            System.out.println("Konta: " + selectedBank.listOfAccounts);
             
             Account selectedAccount;
 
@@ -50,10 +60,10 @@ public class Ex03_02 {
             
             Investment selectedInvestment = null; // TODO
 
-            System.out.println("Po roku stan twojego konta bedzie nastpujacy:");
+            System.out.println("Po roku stan twojego konta bedzie następujacy:");
 
             System.out.println("Czy chcesz zakonczyc program? [Y,N]");
-            selected = sc.next();
+            selected = sc.nextLine();
         }
 
         sc.close();
