@@ -14,7 +14,7 @@ public abstract class Bank {
     protected HashMap<String, Class<? extends Account>> availableAccounts; // wartościa hasha jest klasa Account
 
     public final List<String> getAvailableAccountNames() {        {
-        // TODO     
+             
         return new ArrayList<String>(availableAccounts.keySet());        
     }
     }
@@ -58,10 +58,10 @@ public abstract class Bank {
     
     // public abstract Investment createInvestement(String investmentName, float contribution);   
     
-    public final Investment createInvestement(String investmentName, float contribution) {
-        // TODO użyć refleksji, na klasie wywołany konstruktor
-        return null;
-    }
+//    public final Investment createInvestement(String investmentName, float contribution) {
+//        // TODO użyć refleksji, na klasie wywołany konstruktor
+//        return null;
+//    }
     
    
 }
