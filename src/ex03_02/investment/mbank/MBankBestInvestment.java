@@ -7,9 +7,10 @@ import java.util.Date;
 public class MBankBestInvestment extends Investment {
 
     public MBankBestInvestment(Date startDate, float contribution, float interestRate) {
-        super(startDate, contribution, 10F);
+        super(startDate, contribution, fixedInterest);
     }
 
+    private static final Float fixedInterest = 10F;
     
     @Override
     public float getInterestRate() {

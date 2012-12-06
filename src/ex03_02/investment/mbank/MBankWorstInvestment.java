@@ -9,9 +9,10 @@ public class MBankWorstInvestment extends Investment {
 
             
     public MBankWorstInvestment(Date startDate, float contribution, float interestRate) {
-        super(startDate, contribution, 5F);
+        super(startDate, contribution, fixedInterest);
     }
 
+    private static final Float fixedInterest = 5F;
     
     @Override
     public float getInterestRate() {

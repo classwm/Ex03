@@ -1,8 +1,6 @@
 package ex03_02.account;
 
 import ex03_02.investment.Investment;
-import java.util.HashMap;
-import java.util.List;
 
 public abstract class Account {
 
@@ -32,4 +30,5 @@ public abstract class Account {
     private String firstName;
     private String lastName;
     private float capital;
-}
+    
+} //Account

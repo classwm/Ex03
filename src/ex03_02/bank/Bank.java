@@ -12,54 +12,47 @@ import java.util.Set;
 import java.util.HashSet;
 
 public abstract class Bank {
-    
-    
+
     public void setListOfAccounts(Account account) {
         listOfAccounts.add(account);
     }
-     
+
     public Set<Account> getListOfAccounts() {
         return listOfAccounts;
     }
     private Set<Account> listOfAccounts = new HashSet<Account>();
     
-
-    protected HashMap<String, Class<? extends Account>> availableAccounts; // wartościa hasha jest klasa Account
+    protected HashMap<String, Class<? extends Account>> availableAccounts;
 
     public final List<String> getAvailableAccountNames() {
         {
-
             return new ArrayList<String>(availableAccounts.keySet());
         }
     }
 
     public final Account createAccount(String accountName, String firstName, String lastName,
             float capital) {
-        Class<? extends Account> accountClass = availableAccounts.get(accountName); //uzyskane z wywołania klasy
+        Class<? extends Account> accountClass = availableAccounts.get(accountName);
 
         try {
-            return accountClass.getConstructor(String.class, String.class, String.class, float.class).newInstance(accountName, firstName, lastName, capital); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
+            return accountClass.getConstructor(String.class, String.class, String.class, float.class).newInstance(accountName, firstName, lastName, capital); 
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             // IT'S WRONG, BUT LEAVE IT
-        }
-        // availableAccounts.put("obj", StudentAccountPkoBp.class); przykład użycia HashMapy
-
+        }        
         return null;
     }
 
     public final Investment createInvestment(String investmentName, float capital) {
-        Class<? extends Investment> investmentClass = availableInvestments.get(investmentName); //uzyskane z wywołania klasy
+        Class<? extends Investment> investmentClass = availableInvestments.get(investmentName); 
 
         Calendar today = Calendar.getInstance();
         Date time = today.getTime();
-        
 
         try {
-            return investmentClass.getConstructor(Date.class, float.class, float.class).newInstance(time, capital, 0); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
+            return investmentClass.getConstructor(Date.class, float.class, float.class).newInstance(time, capital, 0); // wartość oprocentowania nadpisywana jest później w klasie odpowiedniej lokaty
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             // IT'S WRONG, BUT LEAVE IT
         }
-        
         return null;
     }
     
@@ -69,11 +62,4 @@ public abstract class Bank {
         return new ArrayList<String>(availableInvestments.keySet());
     }
     
-    
-    
-    // public abstract Investment createInvestement(String investmentName, float contribution);   
-//    public final Investment createInvestement(String investmentName, float contribution) {
-//        // TODO użyć refleksji, na klasie wywołany konstruktor
-//        return null;
-//    }
-}
+} // Bank

@@ -72,7 +72,7 @@ public class Ex03_02 {
             }
             Float income = 0F;
             String dump = sc.nextLine();
-            System.out.println("Czy chcesz wybrać lokatę? [Y,N]");
+            System.out.println("Czy chcesz wybrać lokatę? [Y,N]"); // opcja wyboru lokaty
             String ifInvestment = sc.nextLine();
             capital = account.getCapital();
             if (ifInvestment.equalsIgnoreCase("Y")) {
@@ -85,7 +85,7 @@ public class Ex03_02 {
                 System.out.println("Roczny procent: " + selectedInvestment.getInterestRate());
             }
 
-            System.out.println("Po roku stan twojego konta bedzie wynosił:");
+            System.out.println("Po roku stan twojego konta będzie wynosił:");
             capital = capital + income;
             System.out.println(capital);
 
