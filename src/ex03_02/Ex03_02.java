@@ -17,54 +17,57 @@ public class Ex03_02 {
         while (!selected.equalsIgnoreCase("Y")) {
 
             System.out.println("Do wyboru są następujące banki:");
-            Object[] banks = FSC.getBankList().toArray();
+            String[] banks = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru banków
             int i = 1;
             for (String bankName : FSC.getBankList()) {
                 System.out.println("[" + i + "] " + bankName);
+                banks[i] = bankName;
                 i++;
             }
             System.out.println("Podaj numer banku, który wybierasz:");
             int bankNumber = Integer.parseInt(sc.nextLine());
-            String bankName = (String) banks[bankNumber - 1];
+            String bankName = banks[bankNumber];
             Bank selectedBank = FSC.getBank(bankName);
 
             System.out.println("Do wyboru są następujące konta:");
-            Object[] accounts = selectedBank.getAvailableAccountNames().toArray();
+            String[] accounts = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru kont
             i = 1;
             for (String accountName : selectedBank.getAvailableAccountNames()) {
                 System.out.println("[" + i + "] " + accountName);
+                accounts[i] = accountName;
                 i++;
             }
             System.out.println("Podaj numer konta, które wybierasz:");
             int accountNumber = Integer.parseInt(sc.nextLine());
-            String accountName = (String) accounts[accountNumber - 1];
+            String accountName = accounts[accountNumber];
 
             System.out.println("Nazwa wybranego konta: " + accountName);
 
             System.out.println("Podaj imię:");
             String firstName = sc.nextLine();
-
             System.out.println("Podaj nazwisko:");
             String lastName = sc.nextLine();
             System.out.println("Kasa?:");
             Float capital = sc.nextFloat();
+            
             Account account = selectedBank.createAccount(accountName, firstName, lastName, capital);
             separator("=", " ", 40);
-            selectedBank.setListOfAccounts(account);
+            selectedBank.setListOfAccounts(account); // dodanie założonego konta do listy kont banku
             System.out.println("Konta założone w banku " + bankName + ":");
             separator("=", " ", 40);
-            for (Account acc : selectedBank.getListOfAccounts()) {
+            for (Account acc : selectedBank.getListOfAccounts()) { // wyświetlenie kont założonych w banku
                 System.out.println("Nazwa konta: " + acc.getAccountName());
                 System.out.println("Imię i nazwisko: " + acc.getFirstName() + " " + acc.getLastName());
                 System.out.println("Kapitał: " + acc.getCapital());
                 separator("-", " ", 40);
             }           
 
-            System.out.println("Do wyboru są nastepujące lokaty:");
-            Object[] investments = selectedBank.getAvailableInvestmentsNames().toArray();
+            System.out.println("Do wyboru są następujące lokaty:");
+            String[] investments = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru lokat
             i = 1;
             for (String investmentName : selectedBank.getAvailableInvestmentsNames()) {
                 System.out.println("[" + i + "] " + investmentName);
+                investments[i] = investmentName;
                 i++;
             }
             Float income = 0F;
@@ -75,7 +78,7 @@ public class Ex03_02 {
             if (ifInvestment.equalsIgnoreCase("Y")) {
                 System.out.println("Podaj numer lokaty, którą wybierasz:");
                 int investmentNumber = Integer.parseInt(sc.nextLine());
-                String investmentName = (String) investments[investmentNumber - 1];
+                String investmentName = investments[investmentNumber];
                 Investment selectedInvestment = selectedBank.createInvestment(investmentName, capital);
                 income = capital * selectedInvestment.getInterestRate() / 100;
                 System.out.println("Lokata założona: " + selectedInvestment.getStartDate());
@@ -105,5 +108,6 @@ public class Ex03_02 {
             i--;
         }
         System.out.println(" " + info + " ");
-    }
+    }   
+       
 } // Ex03_02
