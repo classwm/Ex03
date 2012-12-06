@@ -16,7 +16,7 @@ public class Ex03_02 {
         String selected = "N";
         while (!selected.equalsIgnoreCase("Y")) {
 
-            System.out.println("Do wyboru sa następujące banki:");
+            System.out.println("Do wyboru są następujące banki:");
             Object[] banks = FSC.getBankList().toArray();
             int i = 1;
             for (String bankName : FSC.getBankList()) {
