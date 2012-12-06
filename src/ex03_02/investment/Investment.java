@@ -10,15 +10,17 @@ public abstract class Investment {
 
     public Investment(Date startDate, float contribution, float interestRate) {
         this.interestRate = interestRate;
-        this.startDate = startDate;   
+        this.startDate = startDate;
         this.contribution = contribution;
     }
-    
-    public abstract float getInterestRate();
-    
+
+    public float getInterestRate() {
+        return interestRate;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
-       
+
     public abstract Date howMuchLonger();
 }

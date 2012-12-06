@@ -6,9 +6,9 @@ import java.util.List;
 
 public class StudentAccountPkoBp extends Account {
 
-    public StudentAccountPkoBp(String firstName, String lastName, float capital) {
+    public StudentAccountPkoBp(String accountName, String firstName, String lastName, float capital) {
         
-                super("Konto Studenckie PkoBp", firstName, lastName, capital);
+                super(accountName, firstName, lastName, capital);
     }    
     
 }

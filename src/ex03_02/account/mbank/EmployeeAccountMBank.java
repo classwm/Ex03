@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EmployeeAccountMBank extends Account {
 
-    public EmployeeAccountMBank(String firstName, String lastName, float capital) {
-        super("Konto Pracownicze MBank", firstName, lastName, capital);
+    public EmployeeAccountMBank(String accountName, String firstName, String lastName, float capital) {
+        super(accountName, firstName, lastName, capital);
     }
 }

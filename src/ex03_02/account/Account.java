@@ -7,6 +7,7 @@ import java.util.List;
 public abstract class Account {
 
     public Account(String accountName, String firstName, String lastName, float capital) {
+        this.accountName = accountName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.capital = capital;

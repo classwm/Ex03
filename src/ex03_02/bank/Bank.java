@@ -15,12 +15,12 @@ import java.util.HashSet;
 
 public abstract class Bank {
     
-    public void setListOfAccounts(Account acc) {
-        listOfAccounts.add(acc);
-    }
     
-        
-    private Set<Account> listOfAccounts;
+    public void setListOfAccounts(Account account) {
+        listOfAccounts.add(account);
+    }
+     
+    public Set<Account> listOfAccounts = new HashSet<Account>();
     
 
     protected HashMap<String, Class<? extends Account>> availableAccounts; // wartościa hasha jest klasa Account
@@ -37,7 +37,7 @@ public abstract class Bank {
         Class<? extends Account> accountClass = availableAccounts.get(accountName); //uzyskane z wywołania klasy
 
         try {
-            return accountClass.getConstructor(String.class, String.class, float.class).newInstance(firstName, lastName, capital); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
+            return accountClass.getConstructor(String.class, String.class, String.class, float.class).newInstance(accountName, firstName, lastName, capital); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             // IT'S WRONG, BUT LEAVE IT
         }
@@ -54,14 +54,14 @@ public abstract class Bank {
         
 
         try {
-            return investmentClass.getConstructor(Date.class, float.class, float.class).newInstance(time, capital, 5); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
+            return investmentClass.getConstructor(Date.class, float.class, float.class).newInstance(time, capital, 0); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             // IT'S WRONG, BUT LEAVE IT
         }
-        // availableAccounts.put("obj", StudentAccountPkoBp.class); przykład użycia HashMapy
-
+        
         return null;
     }
+    
     protected HashMap<String, Class<? extends Investment>> availableInvestments;
 
     public final List<String> getAvailableInvestmentsNames() {

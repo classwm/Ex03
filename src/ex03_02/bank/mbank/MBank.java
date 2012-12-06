@@ -21,4 +21,5 @@ public class MBank extends Bank {
         availableInvestments.put("Najgorsza lokata w MBanku", MBankWorstInvestment.class);
         availableInvestments.put("Najlepsza lokata w MBanku", MBankBestInvestment.class);
     }    
+    
 }

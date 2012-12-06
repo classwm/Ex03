@@ -7,7 +7,7 @@ import java.util.Date;
 public class PkoBpBestInvestment extends Investment {
 
     public PkoBpBestInvestment(Date startDate, float contribution, float interestRate) {
-        super(startDate, contribution, interestRate);
+        super(startDate, contribution, 20F);
     }
 
     
@@ -19,6 +19,7 @@ public class PkoBpBestInvestment extends Investment {
     @Override
     public Date howMuchLonger() {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
+    }  
+    
         
 }

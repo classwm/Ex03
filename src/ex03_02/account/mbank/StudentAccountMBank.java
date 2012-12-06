@@ -7,7 +7,7 @@ import java.util.List;
 
 public class StudentAccountMBank extends Account {
 
-    public StudentAccountMBank(String firstName, String lastName, float capital) {
-        super("Konto Studenckie MBank", firstName, lastName, capital);
+    public StudentAccountMBank(String accountName, String firstName, String lastName, float capital) {
+        super(accountName, firstName, lastName, capital);
     }
 }

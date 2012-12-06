@@ -4,6 +4,7 @@ import ex03_02.account.Account;
 import ex03_02.bank.Bank;
 import ex03_02.fsc.FSC;
 import ex03_02.investment.Investment;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Ex03_02 {
@@ -16,7 +17,7 @@ public class Ex03_02 {
         String selected = "N";
         while (!selected.equalsIgnoreCase("Y")) {
 
-            System.out.println("Do wyboru sa nastepujace banki:");
+            System.out.println("Do wyboru sa następujące banki:");
             for (String bankName : FSC.getBankList()) {
                 System.out.println("* " + bankName);
             }
@@ -24,12 +25,12 @@ public class Ex03_02 {
             String bankName = sc.nextLine();
             Bank selectedBank = FSC.getBank(bankName);
 
-            System.out.println("Do wyboru sa nastepujace konta:");
+            System.out.println("Do wyboru są następujące konta:");
             for (String accountName : selectedBank.getAvailableAccountNames()) {
                 System.out.println("* " + accountName);
             }
             String accountName = sc.nextLine();
-            System.out.println("Nazwa konta: " + accountName);
+            System.out.println("Nazwa wybranego konta: " + accountName);
             System.out.println("Podaj imię:");
             String firstName = sc.nextLine();
 
@@ -44,12 +45,23 @@ public class Ex03_02 {
             System.out.println("Nazwisko: " + account.getLastName());
             System.out.println("Stan konta: " + account.getCapital());
 
-//            selectedBank.setListOfAccounts(account);
-//            System.out.println("Konta: " + selectedBank.listOfAccounts);
+            selectedBank.setListOfAccounts(account);
+            System.out.println("Konta założone w banku " + bankName + ":");
+            for (Account acc : selectedBank.listOfAccounts) {
+                System.out.println(acc.getAccountName());
+                System.out.println(acc.getFirstName());
+                System.out.println(acc.getLastName());
+                System.out.println(acc.getCapital());
+            }
+//           Iterator itr = (selectedBank.listOfAccounts).iterator();
+//            System.out.println("Konta założone w banku " + bankName + ": ");
+//            while (itr.hasNext()) {
+//                System.out.println(itr.next());
+//            }
 
             Account selectedAccount;
 
-            System.out.println("Do wyboru sa nastepujace lokaty:");
+            System.out.println("Do wyboru są nastepujące lokaty:");
             for (String investmentName : selectedBank.getAvailableInvestmentsNames()) {
                 System.out.println("* " + investmentName);
             }
@@ -57,21 +69,21 @@ public class Ex03_02 {
             String dump = sc.nextLine();
             System.out.println("Czy chcesz wybrać lokatę? [Y,N]");
             String ifInvestment = sc.nextLine();
-            capital = account.getCapital();            
+            capital = account.getCapital();
             if (ifInvestment.equalsIgnoreCase("Y")) {
-                System.out.println("Która lokatę wybierasz?");                
+                System.out.println("Która lokatę wybierasz?");
                 String investmentName = sc.nextLine();
                 Investment selectedInvestment = selectedBank.createInvestment(investmentName, capital);
                 income = capital * selectedInvestment.getInterestRate() / 100;
-                System.out.println("Lokata założona: " + selectedInvestment.getStartDate()); 
+                System.out.println("Lokata założona: " + selectedInvestment.getStartDate());
                 System.out.println("Roczny procent: " + selectedInvestment.getInterestRate());
             }
 
             System.out.println("Po roku stan twojego konta bedzie wynosił:");
             capital = capital + income;
             System.out.println(capital);
-            
-            System.out.println("Czy chcesz zakonczyć program? [Y,N]");
+
+            System.out.println("Czy chcesz zakończyć program? [Y,N]");
             selected = sc.nextLine();
         }
 

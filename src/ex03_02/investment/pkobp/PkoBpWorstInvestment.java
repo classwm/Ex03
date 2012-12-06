@@ -8,7 +8,7 @@ import java.util.Date;
 public class PkoBpWorstInvestment extends Investment {
 
     public PkoBpWorstInvestment(Date startDate, float contribution, float interestRate) {
-        super(startDate, contribution, interestRate);
+        super(startDate, contribution, 10F);
     }
 
     
