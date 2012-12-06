@@ -13,10 +13,10 @@ public class MBankWorstInvestment extends Investment {
 
     
     @Override
-    public void getInterestRate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public float getInterestRate() {
+        return interestRate;
     }
-
+        
     @Override
     public Date howMuchLonger() {
         throw new UnsupportedOperationException("Not supported yet.");

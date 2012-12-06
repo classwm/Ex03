@@ -8,9 +8,7 @@ public class StudentAccountPkoBp extends Account {
 
     public StudentAccountPkoBp(String firstName, String lastName, float capital) {
         
-                super(firstName, lastName, capital);
-    }
-
-    
+                super("Konto Studenckie PkoBp", firstName, lastName, capital);
+    }    
     
 }

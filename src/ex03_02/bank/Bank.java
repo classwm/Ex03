@@ -4,8 +4,10 @@ import ex03_02.account.Account;
 import ex03_02.investment.Investment;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Calendar;
 // import java.util.Date;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -17,9 +19,8 @@ public abstract class Bank {
         listOfAccounts.add(acc);
     }
     
-    
-    
-    public Set<Account> listOfAccounts;
+        
+    private Set<Account> listOfAccounts;
     
 
     protected HashMap<String, Class<? extends Account>> availableAccounts; // wartościa hasha jest klasa Account
@@ -48,10 +49,12 @@ public abstract class Bank {
     public final Investment createInvestment(String investmentName, float capital) {
         Class<? extends Investment> investmentClass = availableInvestments.get(investmentName); //uzyskane z wywołania klasy
 
-        Date time = null;
+        Calendar today = Calendar.getInstance();
+        Date time = today.getTime();
+        
 
         try {
-            return investmentClass.getConstructor(Date.class, float.class, float.class).newInstance(Date.class, float.class, 5); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
+            return investmentClass.getConstructor(Date.class, float.class, float.class).newInstance(time, capital, 5); //"get" wybiera konstruktor z klasy, "new instance" go "uruchamia"
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             // IT'S WRONG, BUT LEAVE IT
         }

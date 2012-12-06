@@ -12,8 +12,8 @@ public class PkoBpBestInvestment extends Investment {
 
     
     @Override
-    public void getInterestRate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public float getInterestRate() {
+        return interestRate;
     }
 
     @Override

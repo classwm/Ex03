@@ -7,6 +7,6 @@ import java.util.List;
 public class EmployeeAccountMBank extends Account {
 
     public EmployeeAccountMBank(String firstName, String lastName, float capital) {
-        super(firstName, lastName, capital);
+        super("Konto Pracownicze MBank", firstName, lastName, capital);
     }
 }

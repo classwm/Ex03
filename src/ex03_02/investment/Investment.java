@@ -14,7 +14,11 @@ public abstract class Investment {
         this.contribution = contribution;
     }
     
-    public abstract void getInterestRate();
-
+    public abstract float getInterestRate();
+    
+    public Date getStartDate() {
+        return startDate;
+    }
+       
     public abstract Date howMuchLonger();
 }
