@@ -5,9 +5,7 @@ import ex03_02.investment.Investment;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
-// import java.util.Date;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +18,10 @@ public abstract class Bank {
         listOfAccounts.add(account);
     }
      
-    public Set<Account> listOfAccounts = new HashSet<Account>();
+    public Set<Account> getListOfAccounts() {
+        return listOfAccounts;
+    }
+    private Set<Account> listOfAccounts = new HashSet<Account>();
     
 
     protected HashMap<String, Class<? extends Account>> availableAccounts; // wartościa hasha jest klasa Account
