@@ -42,7 +42,7 @@ public class Ex03_02 {
         while (!selected.equalsIgnoreCase("Y")) {
 
             System.out.println("Do wyboru są następujące banki:");
-            String[] offeredBanks = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru banków
+            String[] offeredBanks = new String[4]; // pomocnicza tabela do wyświetlania listy wyboru banków, jej rozmiar nie może być mniejszy niż ilość banków + 1
             int i = 1;
             for (String bankName : FSC.getBankList()) {
                 System.out.println("[" + i + "] " + bankName);
@@ -55,7 +55,7 @@ public class Ex03_02 {
             Bank selectedBank = FSC.getBank(bankName);
 
             System.out.println("Do wyboru są następujące konta:");
-            String[] offeredAccounts = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru kont
+            String[] offeredAccounts = new String[4]; // pomocnicza tabela do wyświetlania listy wyboru kont, rozmiar nie mniejszy niż ilość kont + 1
             i = 1;
             for (String accountName : selectedBank.getAvailableAccountNames()) {
                 System.out.println("[" + i + "] " + accountName);
@@ -88,7 +88,7 @@ public class Ex03_02 {
             }
 
             System.out.println("Do wyboru są następujące lokaty:");
-            String[] offeredInvestments = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru lokat
+            String[] offeredInvestments = new String[4]; // pomocnicza tabela do wyświetlania listy wyboru lokat, rozmiar nie mniejszy niż ilość lokat + 1
             i = 1;
             for (String investmentName : selectedBank.getAvailableInvestmentsNames()) {
                 System.out.println("[" + i + "] " + investmentName);
