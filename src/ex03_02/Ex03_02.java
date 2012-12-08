@@ -5,6 +5,8 @@ import ex03_02.bank.Bank;
 import ex03_02.fsc.FSC;
 import ex03_02.investment.Investment;
 import java.util.Scanner;
+import ex03_02.database.DatabaseTool;
+import java.sql.SQLException;
 
 public class Ex03_02 {
 
@@ -13,33 +15,56 @@ public class Ex03_02 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        String bankWithSQL = "PkoBp";  // bank, do którego zostaną wczytane konta z pliku SQLite
+        Bank importToBank = FSC.getBank(bankWithSQL);
+        separator("=", " ", 40);
+        System.out.println("Konta wczytane z pliku SQLite do " + bankWithSQL);
+        separator("=", " ", 40);
+        try {  // pobiera i wyświetla konta zawarte w pliku SQLite, przypisuje je banku ze zmiennej bankWithSQL
+            Account[] acc = DatabaseTool.getAccounts();
+
+            for (Account acc2 : acc) {
+                System.out.println("Nazwa konta: " + acc2.getAccountName());
+                System.out.println("Imię i nazwisko: " + acc2.getFirstName() + " " + acc2.getLastName());
+                System.out.println("Kapitał: " + acc2.getCapital());
+                separator("-", " ", 40);
+                importToBank.setListOfAccounts(acc2);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Błąd odczytu SQL!");
+            System.out.println(ex);
+            // IT'S NOT EXACTLY GOOD, BUT I LEAVE IT :)
+        }
+
+        System.out.println("");
+
         String selected = "N";
         while (!selected.equalsIgnoreCase("Y")) {
 
             System.out.println("Do wyboru są następujące banki:");
-            String[] banks = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru banków
+            String[] offeredBanks = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru banków
             int i = 1;
             for (String bankName : FSC.getBankList()) {
                 System.out.println("[" + i + "] " + bankName);
-                banks[i] = bankName;
+                offeredBanks[i] = bankName;
                 i++;
             }
             System.out.println("Podaj numer banku, który wybierasz:");
-            int bankNumber = Integer.parseInt(sc.nextLine());
-            String bankName = banks[bankNumber];
+            int offeredBankNumber = Integer.parseInt(sc.nextLine());
+            String bankName = offeredBanks[offeredBankNumber];
             Bank selectedBank = FSC.getBank(bankName);
 
             System.out.println("Do wyboru są następujące konta:");
-            String[] accounts = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru kont
+            String[] offeredAccounts = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru kont
             i = 1;
             for (String accountName : selectedBank.getAvailableAccountNames()) {
                 System.out.println("[" + i + "] " + accountName);
-                accounts[i] = accountName;
+                offeredAccounts[i] = accountName;
                 i++;
             }
-            System.out.println("Podaj numer konta, które wybierasz:");
-            int accountNumber = Integer.parseInt(sc.nextLine());
-            String accountName = accounts[accountNumber];
+            System.out.println("Podaj numer rodzaju konta, które wybierasz:");
+            int offeredAccountNumber = Integer.parseInt(sc.nextLine());
+            String accountName = offeredAccounts[offeredAccountNumber];
 
             System.out.println("Nazwa wybranego konta: " + accountName);
 
@@ -49,7 +74,7 @@ public class Ex03_02 {
             String lastName = sc.nextLine();
             System.out.println("Kasa?:");
             Float capital = sc.nextFloat();
-            
+
             Account account = selectedBank.createAccount(accountName, firstName, lastName, capital);
             separator("=", " ", 40);
             selectedBank.setListOfAccounts(account); // dodanie założonego konta do listy kont banku
@@ -60,14 +85,14 @@ public class Ex03_02 {
                 System.out.println("Imię i nazwisko: " + acc.getFirstName() + " " + acc.getLastName());
                 System.out.println("Kapitał: " + acc.getCapital());
                 separator("-", " ", 40);
-            }           
+            }
 
             System.out.println("Do wyboru są następujące lokaty:");
-            String[] investments = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru lokat
+            String[] offeredInvestments = new String[20]; // pomocnicza tabela do wyświetlania listy wyboru lokat
             i = 1;
             for (String investmentName : selectedBank.getAvailableInvestmentsNames()) {
                 System.out.println("[" + i + "] " + investmentName);
-                investments[i] = investmentName;
+                offeredInvestments[i] = investmentName;
                 i++;
             }
             Float income = 0F;
@@ -77,8 +102,8 @@ public class Ex03_02 {
             capital = account.getCapital();
             if (ifInvestment.equalsIgnoreCase("Y")) {
                 System.out.println("Podaj numer lokaty, którą wybierasz:");
-                int investmentNumber = Integer.parseInt(sc.nextLine());
-                String investmentName = investments[investmentNumber];
+                int offeredInvestmentNumber = Integer.parseInt(sc.nextLine());
+                String investmentName = offeredInvestments[offeredInvestmentNumber];
                 Investment selectedInvestment = selectedBank.createInvestment(investmentName, capital);
                 income = capital * selectedInvestment.getInterestRate() / 100;
                 System.out.println("Lokata założona: " + selectedInvestment.getStartDate());
@@ -91,6 +116,14 @@ public class Ex03_02 {
 
             System.out.println("Czy chcesz zakończyć program? [Y,N]");
             selected = sc.nextLine();
+        }
+        try {
+            DatabaseTool.saveAccounts(importToBank.getListOfAccounts());
+            System.out.println("Konta utworzone w " + bankWithSQL + " zostały zapisane do pliku.");
+        } catch (SQLException ex) {
+            System.out.println("Błąd przy zapisie SQL!");
+            System.out.println(ex);
+            // IT'S NOT EXACTLY GOOD, BUT I LEAVE IT :)
         }
         sc.close();
     } // main
@@ -108,6 +141,5 @@ public class Ex03_02 {
             i--;
         }
         System.out.println(" " + info + " ");
-    }   
-       
+    }
 } // Ex03_02

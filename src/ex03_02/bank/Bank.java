@@ -13,13 +13,28 @@ import java.util.HashSet;
 
 public abstract class Bank {
 
+    /**
+     * Dodaje konto do listy kont utworzonych w danym banku
+     * 
+     * @param account 
+     */
     public void setListOfAccounts(Account account) {
         listOfAccounts.add(account);
     }
 
+    /**
+     * Zwraca listę kont z danego banku
+     * 
+     * @return 
+     */
     public Set<Account> getListOfAccounts() {
         return listOfAccounts;
     }
+    
+    /**
+     * Lista kont w danym banku
+     * 
+     */
     private Set<Account> listOfAccounts = new HashSet<Account>();
     
     protected HashMap<String, Class<? extends Account>> availableAccounts;
